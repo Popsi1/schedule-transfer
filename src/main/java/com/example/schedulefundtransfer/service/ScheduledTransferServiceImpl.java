@@ -65,22 +65,18 @@ public class ScheduledTransferServiceImpl implements ScheduledTransferService{
                 }).exceptionallyAsync(DataResponseUtils::errorResponse).join();
     }
 
+
     public ApiDataResponseDto cancelUserScheduledTransfer(String transferId) {
 
-
         UUID uuid = null;
-        if (transferId.length() == 36) {
-            try {
-                uuid = UUID.fromString(transferId);
-                System.out.println("Converted UUID: " + uuid);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Invalid UUID string format: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Invalid UUID string length.");
+
+        try {
+            uuid = UUID.fromString(transferId);
+            log.info("Converted UUID: " + uuid);
+        } catch (IllegalArgumentException e) {
+            throw new BadRequestException("Invalid UUID string format: " + e.getMessage());
         }
 
-        assert uuid != null;
         ScheduledTransfer scheduledTransfer = scheduledTransferRepository.findById(uuid)
                 .orElseThrow(() -> new ResourceNotFoundException("Scheduled transfer not found :: " + transferId));
 

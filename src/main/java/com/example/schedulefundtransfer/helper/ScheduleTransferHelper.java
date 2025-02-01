@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 public class ScheduleTransferHelper {
 
     public ScheduledTransfer buildUserEntity(ScheduleTransferDto scheduleTransferDto){
-        System.out.println(55555);
         return ScheduledTransfer.builder()
                 .recipientAccountId(scheduleTransferDto.getRecipientAccountId())
                 .senderAccountId(scheduleTransferDto.getSenderAccountId())

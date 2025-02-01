@@ -48,7 +48,7 @@ public class ScheduledTransferController {
             summary = "Cancel Scheduled Transfer for a User"
     )
     public ResponseEntity<ApiDataResponseDto> cancelUserScheduledTransfer(@PathVariable String transferId) {
-        ApiDataResponseDto response = scheduledTransferService.cancelUserScheduledTransfer(transferId);
+        ApiDataResponseDto response = scheduledTransferService.cancelUserScheduledTransfer(transferId.trim());
         return ResponseEntity.ok(response);
     }
 }
